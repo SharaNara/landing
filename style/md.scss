@@ -1,0 +1,111 @@
+$bg: #223;
+$fg: #1cb1bc;
+
+@function light-tint($col, $pc) { @return mix(#fff, $col, $pc); }
+
+@function dark-tint($col, $pc) { @return mix(#000, $col, $pc); }
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+    background-color: $bg;
+    background: radial-gradient(circle, dark-tint($bg, 30%) 0%, $bg 100%); 
+    color: $fg;
+
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+main {
+    margin-top: -15vh;
+    text-align: center;
+
+    header {
+        margin-bottom: 2em;
+    }
+
+    h1,
+    h2,
+    p {
+        margin: 0;
+    }
+
+    h1 {
+        font-size: 5em;
+        font-weight: 900;
+        color: light-tint($fg, 60%);
+    }
+
+    h2 {
+        font-size: 3em;
+        font-weight: 600;
+        color: light-tint($fg, 50%);
+    }
+
+    p {
+        font-weight: 400;
+        font-style: italic;
+
+        span.arrow {
+            display: inline-block;
+            font-style: normal;
+            color: light-tint($fg, 20%);
+
+            &.arrow-left {
+                animation: arrowleft 2s ease infinite;
+            }
+
+            &.arrow-right {
+                animation: arrowright 2s ease infinite;
+            }
+        }
+    }
+
+    a {
+        color: inherit;
+        border-bottom: 2px solid $fg;
+        text-decoration: none;
+
+        &:hover, &:focus {
+            color: dark-tint($bg, 50%);
+            background-color: light-tint($fg, 50%);
+        }
+    }
+}
+
+@keyframes arrowleft {
+    0% { transform: translateX(0%); }
+    50% { transform: translateX(-50%); }
+    100% { transform: translateX(0%); }
+}
+
+@keyframes arrowright {
+    0% { transform: translateX(0%); }
+    50% { transform: translateX(50%); }
+    100% { transform: translateX(0%); }
+}
+
+@media screen and (max-width: 720px) {
+    body {
+        padding: 0 1vw;
+    }
+
+    main {
+        h2 {
+            font-size: 2em;
+            margin-top: 2em;
+        }
+
+        p span.arrow {
+            display: none;  
+            animation: none;
+        }
+    }
+}
